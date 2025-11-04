@@ -1,3 +1,4 @@
+import MagixTable from '@/components/table';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
@@ -38,16 +39,14 @@ export default function Dashboard({ quizzes }: { quizzes: Array<any> }) {
                         {isQuizEmpty ? (
                             <p>No Quiz found</p>
                         ) : (
-                            <ul className='flex flex-col gap-y-2'>
-                                {quizzes.map((quiz) => (
-                                    <li className='hover:cursor-pointer' onClick={() => onClickQuiz(quiz.id)} key={quiz.id}>
-                                        <Card className='px-3 py-3'>
-                                            {quiz.quiz_name}
-                                        </Card>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
+                            <MagixTable
+                                columns={[{
+                                    key: 'quiz_name',
+                                    title: 'Quiz Name',
+                                }]}
+                                items={quizzes}
+                                onRowClick={(quiz) => onClickQuiz(quiz.id)}
+                            />                        )}
                     </CardContent>
                 </Card>
             </div>
